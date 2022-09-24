@@ -7,7 +7,7 @@ import (
 )
 
 type QueuedMessage struct {
-	MessageId uint32
+	MessageId string
 	DeviceId  string
 	Payload   interface{}
 }
@@ -23,9 +23,9 @@ func (j *QueuedMessage) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("invalid QueuedMessage message length")
 	}
 	// MessageTypeId integer This is a Message Type Number which is used to identify the type of the message.
-	message_id, err_message_id := raw["MessageId"].(float64)
-	if !err_message_id {
-		return fmt.Errorf("QueuedMessage data[0] is not a number")
+	message_id, err_message_id := raw["MessageId"].(string)
+	if !err_message_id || message_id == "" {
+		return fmt.Errorf("QueuedMessage data[0] is not a Number")
 	}
 	// Device Id
 	device_id, err_device_id := raw["DeviceId"].(string)
@@ -38,7 +38,7 @@ func (j *QueuedMessage) UnmarshalJSON(b []byte) error {
 		return fmt.Errorf("QueuedMessage data[2] is not a map[string]interface{}")
 	}
 	*j = QueuedMessage{
-		MessageId: uint32(message_id),
+		MessageId: message_id,
 		DeviceId:  device_id,
 		Payload:   payload,
 	}
