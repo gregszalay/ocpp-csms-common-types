@@ -19,9 +19,6 @@ func (j *QueuedMessage) UnmarshalJSON(b []byte) error {
 		fmt.Printf("could not unmarshal json: %s\n", err)
 		return err
 	}
-	if len(raw) != 3 {
-		return fmt.Errorf("invalid QueuedMessage message length")
-	}
 	// MessageTypeId integer This is a Message Type Number which is used to identify the type of the message.
 	message_id, err_message_id := raw["MessageId"].(string)
 	if !err_message_id || message_id == "" {
