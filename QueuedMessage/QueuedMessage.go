@@ -45,7 +45,7 @@ func (j *QueuedMessage) UnmarshalJSON(b []byte) error {
 func (c *QueuedMessage) Marshal() []byte {
 	result, err := json.Marshal(c)
 	if err != nil {
-		fmt.Printf("Could not marshal CALL message: %s\n", err)
+		fmt.Printf("Could not marshal QueuedMessage: %s\n", err)
 		return []byte("")
 	}
 	return result
@@ -62,13 +62,13 @@ func (c *QueuedMessage) MarshalPretty() []byte {
 
 func (c *QueuedMessage) GetPayloadAsJSON() []byte {
 	if c == nil {
-		fmt.Println("CALL object is empty")
+		fmt.Println("QueuedMessage object is empty")
 		return []byte("")
 	}
 	// Re-marshal payload only
 	re_marshalled_payload, re_marshall_err := json.MarshalIndent(c.Payload, "", " ")
 	if re_marshall_err != nil {
-		fmt.Println("Failed to remarshall CALL pazload to json")
+		fmt.Println("Failed to remarshall QueuedMessage payload to json")
 		return []byte("")
 	}
 
