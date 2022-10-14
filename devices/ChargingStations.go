@@ -1,7 +1,5 @@
 package devices
 
-import "time"
-
 type ChargingStationLocation struct {
 	Lat float64 `json:"lat,omitempty"`
 
@@ -30,5 +28,5 @@ type ChargingStation struct {
 
 	Location *ChargingStationLocation `json:"location,omitempty"`
 	// Date and time of last BootNotification received. As defined by date-time - RFC3339
-	LastBoot time.Time `json:"lastBoot,omitempty"`
+	LastBoot string `json:"lastBoot,omitempty"`
 }
